@@ -1,3 +1,5 @@
+#proto.py
+
 from __future__ import division
 import numpy as np
 
@@ -6,40 +8,48 @@ import argparse
 
 from pyhull.delaunay import DelaunayTri
 from pyhull.convex_hull import ConvexHull
+
 import matplotlib.pyplot as plt
 import cv2
-img=cv2.imread('lena.jpg',0)
-temp=0
-for i in range(10,16):
-  temp= img[i,i]+temp
-temp=temp/6
-temp=temp/15
-temp=int (temp)
-points=np.random.randn(temp,2)
-points
+a=[]
+img=cv2.imread('ball.jpg',0)
+edges = cv2.Canny(img,100,200)
+for i in range (0,200) :
+        for j in range(0,200):
+                if edges[i,j]==255 or (i%12==0 and i%20==0) :
+                        a.append((j,i))
+
+
+
+
+
+b=np.asarray(a)
+
 legkeys = []
+
 legitems = []
 dim =2
-print(points)
 
-for pt in points:
-    p, = plt.plot(pt[0], pt[1], 'ro')
+
+#for pt in b:
+ #   p, = plt.plot(pt[0], pt[1], 'ro')
       
 
-legkeys.append(p)
+#legkeys.append(p)
+#comment out everything below this
 legitems.append("Points")
 
-d = DelaunayTri(points)
+d = DelaunayTri(b)
 
 for s in d.simplices:
-    for data in itertools.combinations(s.coords, dim):
+   for data in itertools.combinations(s.coords, dim):
         data = np.array(data)
         p, = plt.plot(data[:,0], data[:,1], 'g-')
 
 legkeys.append(p)
 legitems.append("Delaunay tri")
 
-d = ConvexHull(points)
+d = ConvexHull(b)
 
 for s in d.simplices:
     for data in itertools.combinations(s.coords, dim):
@@ -48,5 +58,6 @@ for s in d.simplices:
 
 legkeys.append(p)
 legitems.append("Convex hull")
+plt.xticks([]), plt.yticks([])
 
 plt.show()
