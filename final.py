@@ -1,6 +1,4 @@
-#Various modules are imported
-import numpy as np
-from tkFileDialog import askopenfilename
+''' This code takes the image input either from harddisk or webcam and prints the triangulated image using the process delaunay triagulation'''
 from tkFileDialog import askopenfile 
 from Tkinter import *
 import cv
