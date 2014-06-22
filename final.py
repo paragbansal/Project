@@ -1,4 +1,11 @@
-''' This code takes the image input either from harddisk or webcam and prints the triangulated image using the process delaunay triagulation'''
+''' For using these code you have to install the following libraries - OpenCV, scipy, matplotlib. Some other libraries used 
+    in the code are pre-installed in the python'''
+
+''' This code takes the image input either from harddisk or webcam and prints the triangulated image using the 
+    process delaunay triagulation'''
+    
+''' While using webcam you need to press Esc button to capture image'''
+
 from tkFileDialog import askopenfile 
 from Tkinter import *
 import cv
